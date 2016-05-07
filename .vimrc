@@ -35,10 +35,10 @@ set cuc
 set shortmess=atI   " 启动的时候不显示那个援助乌干达儿童的提示  
 set go=             " 不要图形按钮  
 syntax enable
-"set background=dark
 highlight NonText guibg=#060606
 highlight Folded  guibg=#0A0A0A guifg=#9090D0
 colorschem molokai
+let g:molokai_original = 1
 
 "color ron     " 设置背景主题  
 "set guifont=Courier_New:h10:cANSI   " 设置字体  
@@ -294,8 +294,13 @@ if has("autocmd")
           \   exe "normal g`\"" |
           \ endif
 endif
-"当打开vim且没有文件时自动打开NERDTree
-"autocmd vimenter * if !argc() | NERDTree | endif
+"当打开vim时自动打开NERDTree
+autocmd vimenter *  NERDTree
+"当打开nerdtree后重定位到主窗口
+autocmd VimEnter * wincmd p
+"当打开vim时自动打开Tagbar
+autocmd vimenter *  Tagbar
+
 " 只剩 NERDTree时自动关闭
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
