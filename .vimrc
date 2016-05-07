@@ -456,7 +456,7 @@ let g:html_indent_style1 = "inc"
 filetype plugin indent on     " required!
 "
 "ctrlp设置
-"
+
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.png,*.jpg,*.gif     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.pyc,*.png,*.jpg,*.gif  " Windows
 
@@ -471,6 +471,6 @@ let g:NERDTreeWinSize=20
 
 "tagbar 设置 
 nmap <F4> :TagbarToggle<CR>
-let g:tagbar_ctags_bin = 'ctags'
+"let g:tagbar_ctags_bin = '/usr/bin/ctags'
 let g:tagbar_width = 30
 let g:tagbar_ctags_bin='~/ctags'
