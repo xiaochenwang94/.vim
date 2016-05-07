@@ -88,7 +88,9 @@ filetype indent on
 set viminfo+=!
 " 带有如下符号的单词不要被换行分割
 set iskeyword+=_,$,@,%,#,-
-" 字符间插入的像素行数目
+" vim 复制到mac剪贴板
+vmap "+y :w !pbcopy<CR><CR>  
+nmap "+p :r !pbpaste<CR><CR> 
 
 "markdown配置
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=mkd
@@ -97,8 +99,6 @@ au BufRead,BufNewFile *.{js}   set filetype=javascript
 "rkdown to HTML  
 nmap md :!~/.vim/markdown.pl % > %.html <CR><CR>
 nmap fi :!firefox %.html & <CR><CR>
-nmap \ \cc
-vmap \ \cc
 
 "将tab替换为空格
 nmap tt :%s/\t/    /g<CR>
@@ -304,6 +304,9 @@ autocmd vimenter *  Tagbar
 " 只剩 NERDTree时自动关闭
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
+"退出VIM时自动关闭tagbar
+autocmd bufenter * if (winnr("$") == 3 && exists("b:TagbarType") &&b:TagbarType == "primary")  | qa | endif
+
 " 设置当文件被改动时自动载入
 set autoread
 " quickfix模式
@@ -439,7 +442,6 @@ Bundle 'Vim-Script-Updater'
 Bundle 'ctrlp.vim'
 Bundle 'tacahiroy/ctrlp-funky'
 Bundle 'jsbeautify'
-Bundle 'The-NERD-Commenter'
 Bundle 'django_templates.vim'
 Bundle 'Django-Projects'
 Bundle 'mattn/emmet-vim'
@@ -449,6 +451,7 @@ Bundle 'https://github.com/Lokaltog/vim-powerline'
 Bundle 'https://github.com/vim-scripts/a.vim.git'
 Bundle 'https://github.com/tpope/vim-commentary.git'
 Bundle 'https://github.com/majutsushi/tagbar.git'
+Bundle 'https://github.com/scrooloose/nerdtree.git'
 
 Plugin 'alvan/vim-closetag'
 runtime macros/matchit.vim
