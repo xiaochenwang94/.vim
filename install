@@ -15,6 +15,7 @@ fi
 sudo easy_install -ZU autopep8 
 sudo ln -s /usr/bin/ctags /usr/local/bin/ctags
 sudo ln -s ~/.vim/.vimrc ~/.vimrc
+git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 echo "安装完毕将自动退出" >> fangpin
 echo "请耐心等待" >> fangpin
 vim fangpin -c "BundleInstall" -c "q" -c "q"
