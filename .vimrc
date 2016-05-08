@@ -10,13 +10,13 @@ set selection=inclusive
 set wildmenu
 set mousemodel=popup
 
-au FileType php setlocal dict+=~/.vim/dict/php_funclist.dict
-au FileType css setlocal dict+=~/.vim/dict/css.dict
-au FileType c setlocal dict+=~/.vim/dict/c.dict
-au FileType cpp setlocal dict+=~/.vim/dict/cpp.dict
-au FileType scale setlocal dict+=~/.vim/dict/scale.dict
-au FileType javascript setlocal dict+=~/.vim/dict/javascript.dict
-au FileType html setlocal dict+=~/.vim/dict/javascript.dict
+"au FileType php setlocal dict+=~/.vim/dict/php_funclist.dict
+"au FileType css setlocal dict+=~/.vim/dict/css.dict
+"au FileType c setlocal dict+=~/.vim/dict/c.dict
+"au FileType cpp setlocal dict+=~/.vim/dict/cpp.dict
+"au FileType scale setlocal dict+=~/.vim/dict/scale.dict
+"au FileType javascript setlocal dict+=~/.vim/dict/javascript.dict
+"au FileType html setlocal dict+=~/.vim/dict/javascript.dict
 
 "
 "syntastic相关
@@ -40,13 +40,10 @@ highlight Folded  guibg=#0A0A0A guifg=#9090D0
 colorschem molokai
 let g:molokai_original = 1
 
-"color ron     " 设置背景主题  
-"set guifont=Courier_New:h10:cANSI   " 设置字体  
 autocmd InsertEnter * se cul    " 用浅色高亮当前行  
 set ruler           " 显示标尺  
 set showcmd         " 输入的命令显示出来，看的清楚些  
 set scrolloff=3     " 光标移动到buffer的顶部和底部时保持3行距离  
-"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "状态行显示的内容  
 set laststatus=2    " 启动显示状态行(1),总是显示状态行(2)  
 set nocompatible  "去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限  
 " 显示中文帮助
@@ -92,13 +89,8 @@ set iskeyword+=_,$,@,%,#,-
 vmap "+y :w !pbcopy<CR><CR>  
 nmap "+p :r !pbpaste<CR><CR> 
 
-"markdown配置
-au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=mkd
 au BufRead,BufNewFile *.{go}   set filetype=go
 au BufRead,BufNewFile *.{js}   set filetype=javascript
-"rkdown to HTML  
-nmap md :!~/.vim/markdown.pl % > %.html <CR><CR>
-nmap fi :!firefox %.html & <CR><CR>
 
 "将tab替换为空格
 nmap tt :%s/\t/    /g<CR>
@@ -180,24 +172,15 @@ autocmd BufNewFile * normal G
 "键盘命令
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 :map wq NERDTreeClosewq
-:nmap <silent> <F9> <ESC>:Tlist<RETURN>
 " shift tab pages
 map <S-Left> :tabp<CR>
 map <S-Right> :tabn<CR>
-map! <C-Z> <Esc>zzi
 map! <C-O> <C-Y>,
-map <F7> gg=G
-"map <C-w> <C-w>w
 imap <C-k> <C-y>,
 imap <C-t> <C-q><TAB>
 imap <C-j> <ESC>
 imap jj <ESC>
 imap JJ <ESC>
-" 选中状态下 Ctrl+c 复制
-"map <C-v> "*pa
-imap <C-v> <Esc>"*pa
-imap <C-a> <Esc>^
-imap <C-e> <Esc>$
 set mouse=v
 "去空行  
 nnoremap <F2> :g/^\s*$/d<CR> 
@@ -299,18 +282,16 @@ autocmd VimEnter * wincmd p
 autocmd vimenter *  Tagbar
 
 " 只剩 NERDTree时自动关闭
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 "退出VIM时自动关闭tagbar
-"autocmd bufenter * if (winnr("$") == 3 && exists("b:TagbarType") &&b:TagbarType == "primary")  | qa | endif
+autocmd bufenter * if (winnr("$") == 3 && exists("b:TagbarType") &&b:TagbarType == "primary")  | qa | endif
 
 
 " 设置当文件被改动时自动载入
 set autoread
 " quickfix模式
 autocmd FileType c,cpp map <buffer> <leader><space> :w<cr>:make<cr>
-"代码补全 
-set completeopt=preview,menu 
 "自动保存
 set autowrite
 set magic                   " 设置魔术
@@ -354,16 +335,17 @@ set matchtime=1
 set scrolloff=3
 filetype plugin indent on 
 "打开文件类型检测, 加了这句才可以用智能补全
-set completeopt=longest,menu
+set completeopt=longest,menu,preview
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 "设置tags  
-set tags=tags  
+set tags+=tags  
+set tags+=~/.vim/cpptags
 set autochdir 
 
 
 "python补全
 let g:pydiction_location = '~/.vim/after/complete-dict'
 let g:pydiction_menu_height = 20
-let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
@@ -391,34 +373,22 @@ Bundle 'gmarik/vundle'
 "
 " original repos on github
 Bundle 'tpope/vim-fugitive'
-Bundle 'Yggdroot/indentLine'
-let g:indentLine_char = '┊'
 Bundle 'L9'
 Bundle 'FuzzyFinder'
 Bundle 'https://github.com/wincent/command-t.git'
 Bundle 'Auto-Pairs'
 Bundle 'python-imports.vim'
-Bundle 'CaptureClipboard'
-Bundle 'ctrlp-modified.vim'
-Bundle 'last_edit_marker.vim'
 Bundle 'synmark.vim'
 Bundle 'SQLComplete.vim'
-Bundle 'Javascript-OmniCompletion-with-YUI-and-j'
-Bundle 'jslint.vim'
-Bundle "pangloss/vim-javascript"
-Bundle 'Vim-Script-Updater'
 Bundle 'ctrlp.vim'
-Bundle 'tacahiroy/ctrlp-funky'
-Bundle 'jsbeautify'
-Bundle 'django_templates.vim'
-Bundle 'Django-Projects'
 Bundle 'mattn/emmet-vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'http://github.com/c9s/colorselector.vim'
 Bundle 'https://github.com/Lokaltog/vim-powerline'
 Bundle 'https://github.com/vim-scripts/a.vim.git'
-Bundle 'https://github.com/tpope/vim-commentary.git'
 Bundle 'https://github.com/majutsushi/tagbar.git'
+Bundle 'https://github.com/scrooloose/nerdtree'
+
 
 Plugin 'alvan/vim-closetag'
 runtime macros/matchit.vim
