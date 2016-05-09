@@ -10,21 +10,19 @@ set selection=inclusive
 set wildmenu
 set mousemodel=popup
 
-"au FileType php setlocal dict+=~/.vim/dict/php_funclist.dict
-"au FileType css setlocal dict+=~/.vim/dict/css.dict
-"au FileType c setlocal dict+=~/.vim/dict/c.dict
-"au FileType cpp setlocal dict+=~/.vim/dict/cpp.dict
-"au FileType scale setlocal dict+=~/.vim/dict/scale.dict
-"au FileType javascript setlocal dict+=~/.vim/dict/javascript.dict
-"au FileType html setlocal dict+=~/.vim/dict/javascript.dict
+au FileType php setlocal dict+=~/.vim/dict/php_funclist.dict
+au FileType css setlocal dict+=~/.vim/dict/css.dict
+au FileType c setlocal dict+=~/.vim/dict/c.dict
+au FileType cpp setlocal dict+=~/.vim/dict/cpp.dict
+au FileType scale setlocal dict+=~/.vim/dict/scale.dict
+au FileType javascript setlocal dict+=~/.vim/dict/javascript.dict
+au FileType html setlocal dict+=~/.vim/dict/javascript.dict
+au FileType html setlocal dict+=~/.vim/dict/css.dict
 
-"
-"syntastic相关
 execute pathogen#infect()
 let g:syntastic_python_checkers=['pylint']
 let g:syntastic_php_checkers=['php', 'phpcs', 'phpmd']
-"golang
-"Processing... % (ctrl+c to stop)
+
 let g:fencview_autodetect=0
 set rtp+=$GOROOT/misc/vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -37,8 +35,7 @@ set go=             " 不要图形按钮
 syntax enable
 highlight NonText guibg=#060606
 highlight Folded  guibg=#0A0A0A guifg=#9090D0
-colorschem molokai
-let g:molokai_original = 1
+colorschem darkblue
 
 autocmd InsertEnter * se cul    " 用浅色高亮当前行  
 set ruler           " 显示标尺  
@@ -171,13 +168,11 @@ autocmd BufNewFile * normal G
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "键盘命令
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-:map wq NERDTreeClosewq
 " shift tab pages
 map <S-Left> :tabp<CR>
 map <S-Right> :tabn<CR>
 map! <C-O> <C-Y>,
 imap <C-k> <C-y>,
-imap <C-t> <C-q><TAB>
 imap <C-j> <ESC>
 imap jj <ESC>
 imap JJ <ESC>
@@ -338,8 +333,8 @@ filetype plugin indent on
 set completeopt=longest,menu,preview
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 "设置tags  
-set tags+=tags  
 set tags+=~/.vim/cpptags
+"set tags+=tags  
 set autochdir 
 
 
@@ -357,8 +352,6 @@ set termencoding=utf-8
 set encoding=utf8
 set fileencodings=utf8,ucs-bom,gbk,cp936,gb2312,gb18030
 
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-
 set nocompatible               " be iMproved
 "filetype off                   " required!
 
@@ -366,12 +359,8 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
-" required! 
+Plugin 'alvan/vim-closetag'
 Bundle 'gmarik/vundle'
-
-" My Bundles here:
-"
-" original repos on github
 Bundle 'tpope/vim-fugitive'
 Bundle 'L9'
 Bundle 'FuzzyFinder'
@@ -389,8 +378,17 @@ Bundle 'https://github.com/vim-scripts/a.vim.git'
 Bundle 'https://github.com/majutsushi/tagbar.git'
 Bundle 'https://github.com/scrooloose/nerdtree'
 
+"snipmate
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+"
+" " Snippets are separated from the engine. Add this if you want them:
+ Plugin 'honza/vim-snippets'
+"
+"" Trigger configuration. Do not use <tab> if you use
+let g:UltiSnipsExpandTrigger="<tab>"
+" "
 
-Plugin 'alvan/vim-closetag'
 runtime macros/matchit.vim
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
@@ -398,7 +396,6 @@ let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 
-filetype plugin indent on     " required!
 "
 "ctrlp设置
 
@@ -412,6 +409,7 @@ let g:ctrlp_extensions = ['funky']
 "nerdtree 设置
 let NERDTreeIgnore=['\.pyc']
 let g:NERDTreeWinSize=20
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
 
 
 "tagbar 设置 
