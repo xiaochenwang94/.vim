@@ -275,9 +275,9 @@ if has("autocmd")
           \ endif
 endif
 "当打开vim时自动打开NERDTree
-autocmd vimenter *  NERDTree
+"autocmd vimenter *  NERDTree
 "当打开nerdtree后重定位到主窗口
-autocmd VimEnter * wincmd p
+"autocmd VimEnter * wincmd p
 "当打开vim时自动打开Tagbar
 autocmd vimenter *  Tagbar
 
