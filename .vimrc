@@ -35,7 +35,12 @@ set go=             " 不要图形按钮
 syntax enable
 highlight NonText guibg=#060606
 highlight Folded  guibg=#0A0A0A guifg=#9090D0
-colorschem darkblue
+if has('gui_running')
+    colorscheme solarized
+    set background=dark
+else
+    colorscheme darkblue
+endif
 
 autocmd InsertEnter * se cul    " 用浅色高亮当前行  
 set ruler           " 显示标尺  
