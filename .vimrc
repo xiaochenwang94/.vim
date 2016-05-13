@@ -182,6 +182,7 @@ imap <C-j> <ESC>
 imap jj <ESC>
 imap JJ <ESC>
 set mouse=v
+nnoremap <leader>CC <Plug>CRV_CRefVimInvoke
 "去空行  
 nnoremap <F2> :g/^\s*$/d<CR> 
 "比较文件  
@@ -382,6 +383,7 @@ Bundle 'https://github.com/Lokaltog/vim-powerline'
 Bundle 'https://github.com/vim-scripts/a.vim.git'
 Bundle 'https://github.com/majutsushi/tagbar.git'
 Bundle 'https://github.com/scrooloose/nerdtree'
+Bundle 'https://github.com/scrooloose/nerdcommenter.git'
 
 "snipmate
 " Track the engine.
