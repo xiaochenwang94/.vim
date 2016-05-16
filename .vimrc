@@ -35,11 +35,13 @@ set go=             " 不要图形按钮
 syntax enable
 highlight NonText guibg=#060606
 highlight Folded  guibg=#0A0A0A guifg=#9090D0
+
 if has('gui_running')
     colorscheme solarized
     set background=dark
+    set guifont=Menlo:h16
 else
-    colorscheme darkblue
+    colorscheme molokai
 endif
 
 autocmd InsertEnter * se cul    " 用浅色高亮当前行  
