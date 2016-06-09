@@ -41,7 +41,7 @@ if has('gui_running')
     set background=dark
     set guifont=Menlo:h16
 else
-    colorscheme molokai
+    colorscheme desert
 endif
 
 autocmd InsertEnter * se cul    " 用浅色高亮当前行  
