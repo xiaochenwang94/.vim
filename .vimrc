@@ -382,6 +382,7 @@ Bundle 'https://github.com/vim-scripts/a.vim.git'
 Bundle 'https://github.com/majutsushi/tagbar.git'
 Bundle 'https://github.com/scrooloose/nerdtree'
 Bundle 'https://github.com/scrooloose/nerdcommenter.git'
+Bundle 'https://github.com/tpope/vim-surround'
 
 "snipmate
 " Track the engine.
