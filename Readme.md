@@ -1,6 +1,6 @@
 # 安装方法
 
-	git clone git@github.com:fangpin/.vim
+	git clone git@github.com:xiaochenwang94/.vim
 	cd ~/.vim && ./install
 	
 # 主要特点
